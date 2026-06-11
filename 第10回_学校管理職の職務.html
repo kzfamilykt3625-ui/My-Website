@@ -1,0 +1,1275 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第10回 学校管理職の職務</title>
+  <style>
+    :root {
+      --navy: #14213d;
+      --blue: #2155a3;
+      --cyan: #3aa7b8;
+      --red: #c73e3a;
+      --amber: #d99614;
+      --green: #39735c;
+      --ink: #172033;
+      --muted: #5d6677;
+      --paper: #f7f8fa;
+      --line: #d7dce5;
+      --white: #ffffff;
+      --shadow: 0 22px 70px rgba(20, 33, 61, .18);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; overflow: hidden; }
+    body {
+      color: var(--ink);
+      background: #dfe4eb;
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      letter-spacing: 0;
+    }
+
+    button { font: inherit; }
+    strong { color: var(--navy); }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: clamp(34px, 4.3vw, 78px) clamp(44px, 6vw, 112px) clamp(46px, 5vw, 88px);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      animation: enter .22s ease-out;
+    }
+
+    @keyframes enter {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 14px;
+      height: 100%;
+      background: var(--blue);
+    }
+
+    .slide.section,
+    .slide.title {
+      justify-content: center;
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .slide.section::before,
+    .slide.title::before {
+      width: 100%;
+      height: 12px;
+      background: var(--cyan);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--cyan);
+      font-size: clamp(20px, 1.8vw, 34px);
+      font-weight: 800;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 1180px;
+      margin-bottom: 24px;
+      color: var(--navy);
+      font-size: clamp(40px, 4.4vw, 76px);
+      line-height: 1.16;
+    }
+
+    .title h1,
+    .section h1 {
+      color: var(--white);
+      font-size: clamp(54px, 6.2vw, 108px);
+    }
+
+    .title h2,
+    .section h2 {
+      color: #b9d9ee;
+      font-size: clamp(26px, 2.8vw, 48px);
+      font-weight: 500;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      color: var(--blue);
+      font-size: clamp(30px, 3vw, 52px);
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: var(--navy);
+      font-size: clamp(24px, 2vw, 36px);
+    }
+
+    p, li {
+      font-size: clamp(22px, 2vw, 36px);
+      line-height: 1.48;
+    }
+
+    ul, ol {
+      margin: 8px 0 0;
+      padding-left: 1.25em;
+    }
+
+    li { margin: .22em 0; }
+
+    .small, .small p, .small li {
+      font-size: clamp(17px, 1.45vw, 26px);
+      line-height: 1.4;
+    }
+
+    .tiny, .tiny p, .tiny li {
+      font-size: clamp(14px, 1.05vw, 20px);
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      max-width: 1200px;
+      color: var(--muted);
+      font-size: clamp(24px, 2.3vw, 40px);
+    }
+
+    .section .subtitle,
+    .title .subtitle { color: #d8e5ef; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(20px, 2.3vw, 42px);
+      min-height: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(16px, 1.6vw, 30px);
+      min-height: 0;
+    }
+
+    .visual-split {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.35fr);
+      gap: clamp(22px, 2.5vw, 46px);
+      align-items: center;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .visual-split.equal {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .visual-split.metaphor-split {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+      gap: clamp(16px, 1.8vw, 30px);
+    }
+
+    .metaphor-split .prompt-panel {
+      padding: clamp(14px, 1.5vw, 26px);
+    }
+
+    .metaphor-split .slide-illustration {
+      max-height: 57vh;
+    }
+
+    .slide-illustration {
+      display: block;
+      width: 100%;
+      max-height: 67vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .prompt-panel {
+      padding: clamp(24px, 2.8vw, 48px);
+      border: 4px solid var(--blue);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--navy);
+      font-size: clamp(30px, 3.5vw, 62px);
+      font-weight: 800;
+      line-height: 1.34;
+      text-align: center;
+    }
+
+    .metric-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .metric-stack .card {
+      display: grid;
+      grid-template-columns: minmax(190px, .8fr) minmax(0, 1.2fr);
+      align-items: center;
+      min-height: 92px;
+      padding: 10px 18px;
+    }
+
+    .metric-stack .metric {
+      margin: 0;
+      font-size: clamp(38px, 4.2vw, 68px);
+      white-space: nowrap;
+    }
+
+    .metric-stack .metric-label {
+      margin: 0;
+      font-size: clamp(17px, 1.45vw, 25px);
+    }
+
+    .identity-layout {
+      display: grid;
+      grid-template-columns: minmax(230px, .66fr) minmax(0, 1.34fr);
+      gap: clamp(22px, 2.6vw, 48px);
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .identity-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fbf7ef;
+    }
+
+    .identity-visual img {
+      display: block;
+      width: 100%;
+      height: 44vh;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .identity-cards {
+      display: grid;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .identity-cards .card {
+      padding: clamp(16px, 1.6vw, 28px);
+    }
+
+    .identity-cards .card h2 {
+      margin-bottom: 8px;
+      font-size: clamp(26px, 2.45vw, 42px);
+    }
+
+    .identity-cards .card p {
+      margin-bottom: 0;
+      font-size: clamp(19px, 1.65vw, 29px);
+      line-height: 1.4;
+    }
+
+    .card {
+      padding: clamp(18px, 2vw, 34px);
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .card.accent { border-top: 8px solid var(--blue); }
+    .card.warning { border-top: 8px solid var(--red); }
+    .card.success { border-top: 8px solid var(--green); }
+    .card.amber { border-top: 8px solid var(--amber); }
+
+    .callout {
+      margin-top: 22px;
+      padding: 18px 24px;
+      border-left: 8px solid var(--blue);
+      background: #eaf1fb;
+      font-size: clamp(22px, 1.9vw, 34px);
+      line-height: 1.45;
+    }
+
+    .callout.red {
+      border-left-color: var(--red);
+      background: #fbeceb;
+    }
+
+    .quote {
+      margin: 16px 0;
+      padding: clamp(18px, 2vw, 34px);
+      border-left: 8px solid var(--cyan);
+      background: var(--white);
+      font-size: clamp(22px, 2vw, 36px);
+      line-height: 1.5;
+    }
+
+    .big-question {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4vh 5vw;
+      border: 4px solid var(--blue);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--navy);
+      font-size: clamp(38px, 5vw, 86px);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .metric {
+      margin-bottom: 10px;
+      color: var(--navy);
+      font-size: clamp(44px, 5.2vw, 92px);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: clamp(18px, 1.5vw, 28px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-size: clamp(17px, 1.45vw, 27px);
+      line-height: 1.35;
+    }
+
+    th {
+      padding: 13px 14px;
+      color: var(--white);
+      background: var(--navy);
+      text-align: left;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--line);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) { background: #eef2f6; }
+
+    .flow-table {
+      font-size: clamp(15px, 1.25vw, 23px);
+    }
+
+    .flow-table th,
+    .flow-table td {
+      padding: 9px 10px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      color: var(--white);
+      background: var(--red);
+      font-size: .68em;
+      font-weight: 800;
+      vertical-align: .16em;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .timeline > div {
+      position: relative;
+      min-height: 145px;
+      padding: 22px 18px;
+      border-top: 8px solid var(--blue);
+      background: var(--white);
+    }
+
+    .timeline b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: clamp(24px, 2vw, 36px);
+    }
+
+    .timeline span {
+      font-size: clamp(17px, 1.4vw, 25px);
+      line-height: 1.35;
+    }
+
+    .network {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 22px 34px;
+      align-items: center;
+      margin: 8px auto 0;
+      width: min(1120px, 100%);
+    }
+
+    .network-lines {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .network-lines line {
+      stroke: #759cc8;
+      stroke-width: 2.5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .network .node {
+      position: relative;
+      z-index: 3;
+      padding: 15px 14px;
+      border: 3px solid #9db3c9;
+      border-radius: 8px;
+      background: var(--white);
+      text-align: center;
+      font-size: clamp(18px, 1.55vw, 28px);
+      font-weight: 700;
+    }
+
+    .network .center {
+      grid-column: 2;
+      grid-row: 2;
+      z-index: 5;
+      padding: 22px 14px;
+      box-shadow: 0 8px 18px rgba(20, 33, 61, .22);
+      border-color: var(--navy);
+      color: var(--white);
+      background: var(--navy);
+      font-size: clamp(28px, 2.7vw, 48px);
+    }
+
+    .network .top { grid-column: 2; grid-row: 1; }
+    .network .left { grid-column: 1; grid-row: 2; }
+    .network .right { grid-column: 3; grid-row: 2; }
+    .network .bottom-left { grid-column: 1; grid-row: 3; }
+    .network .bottom { grid-column: 2; grid-row: 3; }
+    .network .bottom-right { grid-column: 3; grid-row: 3; }
+
+    .private-role {
+      margin-top: 24px;
+      padding: 15px 20px;
+      border-top: 4px dashed #8893a4;
+      text-align: center;
+      font-size: clamp(20px, 1.65vw, 30px);
+    }
+
+    .source {
+      margin-top: auto;
+      padding-top: 12px;
+      color: var(--muted);
+      font-size: clamp(12px, .9vw, 17px);
+      line-height: 1.3;
+    }
+
+    .speaker-note { display: none; }
+
+    .notes-panel {
+      position: fixed;
+      z-index: 20;
+      right: 18px;
+      bottom: 58px;
+      display: none;
+      width: min(560px, calc(100vw - 36px));
+      max-height: 44vh;
+      overflow: auto;
+      padding: 18px 20px;
+      border: 2px solid #8794a5;
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .notes-panel.visible { display: block; }
+
+    .controls {
+      position: fixed;
+      z-index: 30;
+      right: 18px;
+      bottom: 14px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .controls button {
+      width: 38px;
+      height: 34px;
+      border: 1px solid #9aa4b2;
+      border-radius: 5px;
+      color: var(--navy);
+      background: rgba(255,255,255,.92);
+      cursor: pointer;
+    }
+
+    .counter {
+      position: fixed;
+      z-index: 25;
+      left: 24px;
+      bottom: 18px;
+      color: #687385;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .progress {
+      position: fixed;
+      z-index: 25;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 6px;
+      background: var(--cyan);
+      transition: width .18s ease;
+    }
+
+    .overview {
+      overflow: auto;
+      padding: 24px;
+      background: #cfd6df;
+    }
+
+    .overview .slide {
+      position: relative;
+      display: flex;
+      float: left;
+      width: 420px;
+      height: 236px;
+      margin: 10px;
+      padding: 22px 28px;
+      overflow: hidden;
+      transform: none;
+      box-shadow: 0 8px 22px rgba(20,33,61,.2);
+      cursor: pointer;
+    }
+
+    .overview .slide * { pointer-events: none; }
+    .overview .slide h1 { font-size: 24px; }
+    .overview .slide h2 { font-size: 18px; }
+    .overview .slide p,
+    .overview .slide li,
+    .overview .slide table,
+    .overview .slide .callout,
+    .overview .slide .quote { font-size: 10px; }
+    .overview .slide.active { outline: 5px solid var(--cyan); }
+
+    @media (max-width: 800px) {
+      .grid-2, .grid-3, .visual-split, .visual-split.equal, .identity-layout { grid-template-columns: 1fr; }
+      .slide { overflow-y: auto; }
+      .network { gap: 12px; }
+      .timeline { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media print {
+      @page { size: 16in 9in; margin: 0; }
+      html, body { height: auto; overflow: visible; background: white; }
+      .deck { height: auto; overflow: visible; }
+      .slide, .slide.active {
+        position: relative;
+        display: flex !important;
+        width: 16in;
+        height: 9in;
+        page-break-after: always;
+        animation: none;
+      }
+      .controls, .counter, .progress, .notes-panel { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+
+    <section class="slide title">
+      <p class="eyebrow">教育行政学・教育制度論　第10回</p>
+      <h1>学校管理職の職務</h1>
+      <p class="subtitle">制度上の職務、組織内の役割期待、そして学校現場の労働条件</p>
+      <aside class="speaker-note">前回までの教育委員会論から、学校内部の管理主体へ視点を移す。</aside>
+    </section>
+
+    <section class="slide">
+      <h1>前回から今回へ</h1>
+      <div class="grid-2">
+        <article class="card accent">
+          <h2>学校の外部</h2>
+          <p class="metric-label">教育委員会</p>
+          <ul>
+            <li>学校行政の監督・指導</li>
+            <li>条件整備と広域的な調整</li>
+            <li>地方教育行政法等が根拠</li>
+          </ul>
+        </article>
+        <article class="card success">
+          <h2>学校の内部</h2>
+          <p class="metric-label">校長・教頭</p>
+          <ul>
+            <li>学校運営の直接的責任</li>
+            <li>日々の意思決定と組織調整</li>
+            <li>学校教育法37条等が根拠</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout">今日は、学校の内部で組織を動かす<strong>学校管理職</strong>に着目する。</div>
+    </section>
+
+    <section class="slide">
+      <h1>本時の目標</h1>
+      <div class="grid-3 small">
+        <article class="card accent">
+          <h3>知識・理解</h3>
+          <p>校長・教頭の法規上の職務と、教師の労働条件・政策的対応を理解する。</p>
+        </article>
+        <article class="card amber">
+          <h3>思考・判断・表現</h3>
+          <p>事例と統計から学校組織の課題を読み取り、改善の可能性を言語化する。</p>
+        </article>
+        <article class="card success">
+          <h3>態度形成</h3>
+          <p>将来の職業人として、組織における役割と責任を自分事として考える。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h1>本時の流れ</h1>
+      <table class="flow-table">
+        <thead><tr><th>前半</th><th>内容</th><th>時間</th><th>後半</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>導入</td><td>MP・接続・目標</td><td>10分</td><td>講義④</td><td>教頭の役割・多忙・法規</td><td>15分</td></tr>
+          <tr><td>演習①</td><td>Slido「学校」</td><td>5分</td><td>講義⑤</td><td>教師の労働条件</td><td>15分</td></tr>
+          <tr><td>講義①</td><td>管理職のメタファー</td><td>20分</td><td>講義⑥</td><td>チーム学校</td><td>12分</td></tr>
+          <tr><td>役割論</td><td>職務と役割期待</td><td>5分</td><td>補足</td><td>主務教諭</td><td>5分</td></tr>
+          <tr><td>講義②</td><td>校長の職務</td><td>15分</td><td>まとめ</td><td>振り返り・MP</td><td>5分</td></tr>
+          <tr><td>講義③</td><td>任用資格・民間人校長</td><td>10分</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">演習①</p>
+      <h1>学校とは？</h1>
+      <h2>Slido WordCloudで集合的な「学校像」を可視化する</h2>
+    </section>
+
+    <section class="slide">
+      <h1>Slido WordCloud</h1>
+      <div class="big-question" style="font-size:clamp(30px,3.8vw,64px)">「学校」という言葉から連想される言葉を<br>なるべくたくさん記入してください。</div>
+      <aside class="speaker-note">QRコードまたはURLを表示。2〜3分入力後、校長・教頭・事務職員が出ているか確認する。</aside>
+    </section>
+
+    <section class="slide">
+      <h1>WordCloudを読む</h1>
+      <div class="grid-3">
+        <article class="card accent"><h3>大きい言葉</h3><p>みんなが共有する「学校像」は何か。</p></article>
+        <article class="card amber"><h3>小さい言葉</h3><p>見落とされやすい仕事や人は誰か。</p></article>
+        <article class="card warning"><h3>出にくい言葉</h3><p>校長、教頭、事務職員は見えているか。</p></article>
+      </div>
+      <div class="callout red">学校の「顔」と呼ばれる校長も、学生の学校像のなかでは<strong>顔がない</strong>のではないか。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">講義①</p>
+      <h1>管理職のメタファー</h1>
+      <h2>「私は何者か」を比喩から考える</h2>
+    </section>
+
+    <section class="slide">
+      <h1>管理職は「カオナシ」か</h1>
+      <div class="identity-layout">
+        <figure class="identity-visual">
+          <img src="assets/kaonashi.png" alt="映画『千と千尋の神隠し』に登場するカオナシのイラスト">
+        </figure>
+        <div class="identity-cards">
+          <article class="card accent">
+            <h2>組織への参入</h2>
+            <p>千尋は突然、職場に放り込まれ、先輩や仲間に支えられながら成長する。</p>
+          </article>
+          <article class="card warning">
+            <h2>名前と自己</h2>
+            <p>名前を奪われると、自分が何者か分からなくなる。管理職も「肩書」に自分を奪われうる。</p>
+          </article>
+        </div>
+      </div>
+      <div class="callout">校長の言葉なのか、教育委員会への忖度なのか。その境界が曖昧になる職務上の難しさ。</div>
+      <div class="source">題材：宮﨑駿監督『千と千尋の神隠し』（2001年）／授業用イラスト</div>
+    </section>
+
+    <section class="slide">
+      <h1>メタファー演習</h1>
+      <div class="visual-split metaphor-split">
+        <div class="prompt-panel" style="font-size:clamp(26px,2.8vw,48px)">校長は（教頭は）<br>＿＿＿＿のような<br>ものである。<br>そのこころは……</div>
+        <img class="slide-illustration" src="assets/metaphor-leadership.png" alt="指揮者、舵、羅針盤、橋、歯車を思い浮かべながら管理職の役割を考える人物のイラスト">
+      </div>
+      <aside class="speaker-note">3〜5分で個人記入。数人を指名して理由まで発表してもらう。</aside>
+    </section>
+
+    <section class="slide">
+      <h1>校長のメタファー</h1>
+      <table>
+        <thead><tr><th>メタファー</th><th>含意</th></tr></thead>
+        <tbody>
+          <tr><td>オーケストラの指揮者</td><td>専門家集団をまとめる調整役</td></tr>
+          <tr><td>難しい航海の船長／小舟の船長</td><td>責任ある意思決定と荒波への対処</td></tr>
+          <tr><td>学校の宣伝マン</td><td>等身大の学校を地域・社会に発信</td></tr>
+          <tr><td>自由の女神</td><td>羨望されるが、期待に縛られ孤独</td></tr>
+          <tr><td>料理人</td><td>素材と状況に応じた柔軟な経営</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">以前は「中小企業の社長」が多かった。最近は、人事権・予算権の乏しさから出にくい。</div>
+    </section>
+
+    <section class="slide">
+      <h1>教頭のメタファー</h1>
+      <div class="grid-2 small">
+        <article class="card warning"><h3>縁の下・受難</h3><p>黒子、便利屋、雑務係、小間使い、サンドバッグ</p></article>
+        <article class="card success"><h3>調整・潤滑</h3><p>扇の要、潤滑油、コーディネーター、パイプ役</p></article>
+        <article class="card accent"><h3>職員室</h3><p>職員室のリーダー、職員室の担任</p></article>
+        <article class="card amber"><h3>方向づけ</h3><p>信号機、羅針盤、ディレクター、学校の運転手</p></article>
+      </div>
+      <div class="callout red">「自分はサンドバッグだ」という自己像は、仕事の過酷さと同時に職務の魅力の喪失も示す。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">幕間：役割論</p>
+      <h1>職務規定と役割期待</h1>
+      <h2>法律に書かれた組織と、現実に動いている組織</h2>
+    </section>
+
+    <section class="slide">
+      <h1>「踊る大捜査線」に見る組織</h1>
+      <div class="grid-3 small">
+        <article class="card warning">
+          <h3>制度上の責任者</h3>
+          <p>スリーアミーゴスは直属上司だが、必ずしも現場を動かせない。</p>
+        </article>
+        <article class="card accent">
+          <h3>非公式な上位者</h3>
+          <p>青島はキャリア組の室井慎次との信頼関係を通じて動く。</p>
+        </article>
+        <article class="card success">
+          <h3>メンター</h3>
+          <p>和久平八郎は、職位を超えて現場の知恵と規範を伝える。</p>
+        </article>
+      </div>
+      <div class="callout">制度上の責任者が、必ずしも職責を果たせるとは限らない。組織は<strong>信頼と期待のネットワーク</strong>でも動く。</div>
+    </section>
+
+    <section class="slide">
+      <h1>役割期待が仕事をつくる</h1>
+      <table>
+        <thead><tr><th>期待する主体</th><th>教頭の実際の仕事への影響</th></tr></thead>
+        <tbody>
+          <tr><td>校長</td><td>裁量を委ねるか、細かな報告を求めるか</td></tr>
+          <tr><td>教職員</td><td>相談が集まり、情報と調整業務が増えるか</td></tr>
+          <tr><td>保護者・地域</td><td>学校の窓口・対外折衝役として認知されるか</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">法令は職務の最低限の骨格。それでも法令に基づいて自分の権限と責任を語れることが、管理職のプレゼンスを支える。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">講義②</p>
+      <h1>校長の職務</h1>
+      <h2>学校教育法37条から考える</h2>
+    </section>
+
+    <section class="slide">
+      <h1>校長の職務：2つの柱</h1>
+      <div class="grid-2">
+        <article class="card accent">
+          <div class="metric">01</div>
+          <h2>校務をつかさどる</h2>
+          <p>学校全体の仕事を掌握し、運営上の最終責任を担う。</p>
+        </article>
+        <article class="card warning">
+          <div class="metric">02</div>
+          <h2>所属職員を監督する</h2>
+          <p>職務上・身分上の義務を含め、学校職員を監督する。</p>
+        </article>
+      </div>
+      <div class="source">根拠：学校教育法第37条第4項</div>
+    </section>
+
+    <section class="slide">
+      <h1>「校務」とは何か</h1>
+      <div class="grid-2">
+        <article class="card accent">
+          <h2>包括論</h2>
+          <p>校務は学校の一切の仕事であり、教育活動も含む。</p>
+          <p class="small"><strong>行政解釈／教員採用試験ではこちら</strong></p>
+        </article>
+        <article class="card amber">
+          <h2>峻別論</h2>
+          <p>校務と教育を区別し、教諭の教育活動の自律性を重視する。</p>
+          <p class="small"><strong>教育法学上の学説</strong></p>
+        </article>
+      </div>
+      <aside class="speaker-note">校務分掌はスライドに載せず口頭説明。同僚教員の担当を例に、校長一人で処理できない校務を分担する仕組みと説明する。</aside>
+    </section>
+
+    <section class="slide">
+      <h1><span class="badge">教採頻出</span>服務義務の2分類</h1>
+      <table>
+        <thead><tr><th>種別</th><th>対象時間</th><th>主な義務</th></tr></thead>
+        <tbody>
+          <tr><td><strong>職務上の義務</strong></td><td>勤務時間内</td><td>服務の宣誓／職務命令への服従／職務専念</td></tr>
+          <tr><td><strong>身分上の義務</strong></td><td>勤務時間外を含む</td><td>信用失墜行為の禁止／守秘義務／政治的行為・争議行為・営利従事の制限</td></tr>
+        </tbody>
+      </table>
+      <div class="quote">居酒屋でも、SNSでも、退職後でも、守秘義務の問題は残る。校長はそれを含めて所属職員を監督する。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">講義③</p>
+      <h1>校長の任用資格と<br>民間人校長制度</h1>
+    </section>
+
+    <section class="slide">
+      <h1>校長の任用資格</h1>
+      <div class="timeline">
+        <div><b>従来</b><span>教諭免許状＋教育に関する職10年</span></div>
+        <div><b>条件①</b><span>教諭免許状＋教育に関する職5年</span></div>
+        <div><b>条件②</b><span>教育に関する職10年以上</span></div>
+        <div><b>条件③</b><span>同等の資質を有すると教育委員会が認める者</span></div>
+      </div>
+      <div class="callout">資格緩和により、教員免許を持たない民間人も校長に任用できるようになった。</div>
+    </section>
+
+    <section class="slide">
+      <h1>民間人校長：制度の光と影</h1>
+      <div class="grid-2 small">
+        <article class="card warning">
+          <h2>大阪市の事例</h2>
+          <p><strong>11人中7人</strong>が任期中に離職。経歴詐称、セクハラ、土下座強要などの問題も発生。</p>
+          <p>「民間ではこうだった」という比較が、学校文化との摩擦を生む。</p>
+        </article>
+        <article class="card success">
+          <h2>藤原和博氏の事例</h2>
+          <p>「よのなか科」や外部人材の活用で新しい教育活動を実現。</p>
+          <p>一方で、個人の人脈・資質への依存と持続可能性が課題。</p>
+        </article>
+      </div>
+      <div class="callout">「トップが変われば組織が変わる」は、制度として再現可能なのか。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">講義④</p>
+      <h1>教頭の役割と多忙</h1>
+      <h2>校長を補佐する職は、なぜ最も長く働くのか</h2>
+    </section>
+
+    <section class="slide">
+      <h1>教頭の一日</h1>
+      <div class="quote small">「毎朝5時すぎに家を出て、6時20分には学校の門を開ける。担任が入院すれば代わりの常勤講師をさがし、窓ガラスが割れれば業者に電話する。教育委員会からの通知を読み、教員の勤務評価、報告書作成。帰宅は午前0時すぎ。休みは新学期になって1日だけ。」</div>
+      <div class="grid-3 small">
+        <article class="card accent"><h3>人</h3><p>代替講師、教員評価、相談対応</p></article>
+        <article class="card amber"><h3>物</h3><p>施設破損、業者連絡、安全管理</p></article>
+        <article class="card warning"><h3>情報</h3><p>教委通知、報告書、対外連絡</p></article>
+      </div>
+      <div class="source">出典：朝日新聞 2015年5月24日（授業用に必要部分を抜粋）</div>
+    </section>
+
+    <section class="slide">
+      <h1>誰が最も長く学校にいるか</h1>
+      <table>
+        <thead><tr><th>職種</th><th>小学校</th><th>中学校</th></tr></thead>
+        <tbody>
+          <tr><td><strong>副校長・教頭</strong></td><td><strong>11時間45分</strong></td><td><strong>11時間42分</strong></td></tr>
+          <tr><td>主幹教諭</td><td>11時間07分</td><td>11時間24分</td></tr>
+          <tr><td>教諭</td><td>10時間45分</td><td>11時間01分</td></tr>
+          <tr><td>養護教諭</td><td>10時間26分</td><td>10時間31分</td></tr>
+          <tr><td>校長</td><td>9時間44分</td><td>9時間46分</td></tr>
+          <tr><td>学校事務職員</td><td>7時間55分</td><td>8時間02分</td></tr>
+        </tbody>
+      </table>
+      <div class="callout red">学校種の違い以上に、<strong>職種の違い</strong>が在校等時間を左右する。</div>
+      <div class="source">出典：文部科学省「教員勤務実態調査（令和4年度）確定値」</div>
+    </section>
+
+    <section class="slide">
+      <h1>教頭を取り巻く役割期待</h1>
+      <div class="network" aria-label="教頭を中心とした役割期待の関係図">
+        <svg class="network-lines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <marker id="role-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#759cc8"></path>
+            </marker>
+          </defs>
+          <line x1="500" y1="170" x2="500" y2="215" marker-end="url(#role-arrow)"></line>
+          <line x1="295" y1="300" x2="335" y2="300" marker-end="url(#role-arrow)"></line>
+          <line x1="705" y1="300" x2="665" y2="300" marker-end="url(#role-arrow)"></line>
+          <line x1="295" y1="500" x2="375" y2="395" marker-end="url(#role-arrow)"></line>
+          <line x1="500" y1="500" x2="500" y2="385" marker-end="url(#role-arrow)"></line>
+          <line x1="705" y1="500" x2="625" y2="395" marker-end="url(#role-arrow)"></line>
+        </svg>
+        <div class="node top">教育委員会<br><span class="tiny">監督・報告</span></div>
+        <div class="node left">保護者・PTA<br><span class="tiny">苦情・要望</span></div>
+        <div class="node center">教頭</div>
+        <div class="node right">校長<br><span class="tiny">補佐・整理</span></div>
+        <div class="node bottom-left">地域住民<br><span class="tiny">連携・折衝</span></div>
+        <div class="node bottom">教職員<br><span class="tiny">調整・指導</span></div>
+        <div class="node bottom-right">児童生徒<br><span class="tiny">指導・相談</span></div>
+      </div>
+      <div class="private-role"><strong>私的役割も続く：</strong>父親／夫／息子／地域の一員……</div>
+    </section>
+
+    <section class="slide">
+      <h1>教頭の法規上の職務</h1>
+      <table>
+        <thead><tr><th>法令上の表現</th><th>実務上の意味</th></tr></thead>
+        <tbody>
+          <tr><td><strong>校長を助ける</strong></td><td>校長の判断を支える情報・選択肢を準備する</td></tr>
+          <tr><td><strong>校務を整理する</strong></td><td>情報収集、連絡調整、進行管理、指導助言を行う</td></tr>
+          <tr><td><strong>校務をつかさどる</strong></td><td>校長に事故があるときは代理し、欠けたときは代行する</td></tr>
+        </tbody>
+      </table>
+      <div class="quote">天気予報を見て選択肢を準備するのは教頭。行事を実施するか最終決定するのは校長。</div>
+    </section>
+
+    <section class="slide">
+      <h1>専決権から副校長へ</h1>
+      <div class="timeline">
+        <div><b>現実</b><span>教頭が多くの事務を事実上処理していた</span></div>
+        <div><b>専決</b><span>校長の権限に属する定型的な事務を、あらかじめ教頭に決裁させる</span></div>
+        <div><b>1996</b><span>東京都の報告書が権限と責任の明確化を提言</span></div>
+        <div><b>2007</b><span>学校教育法改正で副校長を制度化</span></div>
+      </div>
+      <div class="callout">副校長は、校長を助けるだけでなく、<strong>校長の命を受けて校務の一部を自らつかさどる</strong>職として権限を明確化した。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">講義⑤</p>
+      <h1>教師の労働条件</h1>
+      <h2>幼稚園から高等学校まで、比較して読む</h2>
+    </section>
+
+    <section class="slide">
+      <h1>学校種別の労働実態</h1>
+      <table class="small comparison-table">
+        <thead><tr><th>指標</th><th>幼稚園</th><th>小学校</th><th>中学校</th><th>高校</th></tr></thead>
+        <tbody>
+          <tr><td>平日1日</td><td>約9:50*</td><td><strong>10:45</strong></td><td><strong>11:01</strong></td><td>10:06</td></tr>
+          <tr><td>週労働時間</td><td>約50:17*</td><td>52:47</td><td><strong>57:24</strong></td><td>約50時間以上</td></tr>
+          <tr><td>月の超過勤務</td><td>校内49:27*<br>持帰り込み75:43*</td><td>―</td><td>108:08**</td><td>―</td></tr>
+          <tr><td>休憩0分</td><td><strong>61.2%*</strong></td><td colspan="3">全体平均37.5%**</td></tr>
+        </tbody>
+      </table>
+      <div class="source">* 全教「教職員勤務実態調査2022」等による参考・試算値。幼稚園は文科省調査の対象外で、定義は厳密に同一ではない。<br>** 日教組「学校現場の働き方改革に関する意識調査」2024年公表。小中高の平日・週は文科省「教員勤務実態調査（令和4年度）確定値」。</div>
+    </section>
+
+    <section class="slide">
+      <h1>データから考える</h1>
+      <div class="grid-3">
+        <article class="card accent"><h3>観察</h3><p>数字を見て、何を感じるか。</p></article>
+        <article class="card warning"><h3>当事者</h3><p>自分が働くなら、何が最もつらいか。</p></article>
+        <article class="card success"><h3>政策</h3><p>誰が、どのように対処すべきか。</p></article>
+      </div>
+      <div class="callout red">長時間労働を、個人の「献身」や「やりがい」だけで説明してよいのか。</div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">講義⑥</p>
+      <h1>チーム学校</h1>
+      <h2>多様な専門職を動員すれば、働き方は変わるのか</h2>
+    </section>
+
+    <section class="slide">
+      <h1>「チーム学校」とは</h1>
+      <div class="grid-2">
+        <article class="card warning">
+          <h2>背景</h2>
+          <ul class="small">
+            <li>事務・部活動で授業や研修に集中できない</li>
+            <li>不登校、発達障害、貧困等の課題が複雑化</li>
+            <li>得意な教員への非公式な業務集中</li>
+          </ul>
+        </article>
+        <article class="card success">
+          <h2>方向性</h2>
+          <ul class="small">
+            <li>専門職が専門業務を正式に分担</li>
+            <li>地域人材・外部専門家を組織化</li>
+            <li>教員が本務に専念できる環境をつくる</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout">チーム学校は、子どもの課題への対応だけでなく、<strong>教員を守る仕組み</strong>でもある。</div>
+    </section>
+
+    <section class="slide">
+      <h1>学校を構成する専門職</h1>
+      <div class="grid-3 small">
+        <article class="card accent"><h3>教育</h3><p>教諭、養護教諭、栄養教諭、司書教諭、ALT</p></article>
+        <article class="card success"><h3>心理・福祉</h3><p>SC、SSW、教育相談員、支援員</p></article>
+        <article class="card amber"><h3>法務・運営</h3><p>スクールロイヤー、事務職員、学校司書、地域人材</p></article>
+      </div>
+      <table style="margin-top:22px">
+        <thead><tr><th>専門職</th><th>主なアプローチ</th></tr></thead>
+        <tbody>
+          <tr><td>SC</td><td>心理・感情など「心の内側」</td></tr>
+          <tr><td>SSW</td><td>家庭、経済、制度など「環境」</td></tr>
+          <tr><td>スクールロイヤー</td><td>校則、保護者対応、事故等の法的支援</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="slide">
+      <h1>配置時間が増えると何が変わるか</h1>
+      <div class="grid-3">
+        <article class="card success"><div class="metric">↑</div><h3>相談件数</h3><p class="small">生徒・保護者・教職員の相談件数が増える。</p></article>
+        <article class="card accent"><div class="metric">↑</div><h3>会議参加</h3><p class="small">週1回終日以上で校内会議・情報共有が活発になる。</p></article>
+        <article class="card amber"><div class="metric">↑</div><h3>連携</h3><p class="small">専門職・学外機関との連携が進む。</p></article>
+      </div>
+      <div class="callout">SCの配置拡充は、相談環境とチーム対応の充実に一定の成果を示す。</div>
+      <div class="source">出典：文部科学省「SC及びSSWの常勤化に向けた調査研究」令和5年度</div>
+    </section>
+
+    <section class="slide">
+      <h1>それでも残る課題</h1>
+      <div class="visual-split equal">
+        <div class="metric-stack">
+          <article class="card warning"><div class="metric">34.6万</div><p class="metric-label">不登校児童生徒</p></article>
+          <article class="card warning"><div class="metric">13.4万</div><p class="metric-label">専門機関等の支援を受けていない</p></article>
+          <article class="card warning"><div class="metric">短時間</div><p class="metric-label">SC・SSWは非常勤配置が中心</p></article>
+        </div>
+        <img class="slide-illustration" src="assets/overworked-school-counselor.png" alt="多数の相談記録や予定、支援を待つ児童を抱えて忙しく対応するスクールカウンセラーのイラスト">
+      </div>
+      <div class="callout red">相談需要に対して専門職の配置時間と人数が足りず、支援につながらない児童生徒が残っている。</div>
+    </section>
+
+    <section class="slide">
+      <h1>チーム学校の現在地</h1>
+      <div class="big-question" style="font-size:clamp(32px,4vw,68px)">理念から制度化へ。<br>しかし、制度が実態に追いついていない。</div>
+      <div class="grid-3 small" style="margin-top:22px">
+        <article class="card accent"><h3>常勤化</h3><p>専門職が日常的に学校に関われる配置へ。</p></article>
+        <article class="card success"><h3>待遇改善</h3><p>非正規・非常勤中心の雇用を見直す。</p></article>
+        <article class="card amber"><h3>組織設計</h3><p>連携を教頭個人の調整力に依存させない。</p></article>
+      </div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">補足：最新動向</p>
+      <h1>主務教諭</h1>
+      <h2>2026年4月施行の新たな職</h2>
+    </section>
+
+    <section class="slide">
+      <h1>主務教諭：制度の概要</h1>
+      <table>
+        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>位置づけ</td><td>教諭と主幹教諭・指導教諭の間</td></tr>
+          <tr><td>設置</td><td>教育委員会が任意に置くことができる</td></tr>
+          <tr><td>職務</td><td>教育をつかさどり、教職員間の総合的な調整を行う</td></tr>
+          <tr><td>処遇</td><td>教諭より高い新たな給与級を設定</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">若手支援、教育相談、特別支援、校内研修、情報教育、防災、地域連携など、学校横断的な調整を担う。</div>
+      <div class="source">2025年6月公布、2026年4月1日施行。</div>
+    </section>
+
+    <section class="slide">
+      <h1>主務教諭が解決するもの／生むもの</h1>
+      <div class="grid-2">
+        <article class="card success">
+          <h2>期待</h2>
+          <ul class="small">
+            <li>職務規定と役割期待の隙間を埋める提案として、実質的なキーパーソンに、その能力に応じた地位を与えうる</li>
+            <li>教頭への調整業務の集中を分散</li>
+            <li>チーム学校の連携を強化</li>
+          </ul>
+        </article>
+        <article class="card warning">
+          <h2>課題</h2>
+          <ul class="small">
+            <li>任意設置による地域間格差</li>
+            <li>職位体系の複雑化</li>
+            <li>役割と権限の重複・曖昧化</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide section">
+      <p class="eyebrow">まとめ</p>
+      <h1>制度と現実の間で</h1>
+      <h2>管理職の職務を「暗記」ではなく「組織の問題」として捉える</h2>
+    </section>
+
+    <section class="slide">
+      <h1>本時の核心</h1>
+      <div class="grid-3 small">
+        <article class="card accent"><h3>法令</h3><p>校長・教頭の権限と責任に最低限の骨格を与える。</p></article>
+        <article class="card amber"><h3>役割期待</h3><p>周囲との関係が、実際の仕事と自己像をつくる。</p></article>
+        <article class="card warning"><h3>労働条件</h3><p>個人の献身では解決できない構造的課題がある。</p></article>
+      </div>
+      <div class="callout">政策的応答としてのチーム学校や主務教諭は、解決の完成形ではなく、現在進行形の制度改革である。</div>
+    </section>
+
+    <section class="slide">
+      <h1>次回以降</h1>
+      <div class="grid-2">
+        <article class="card accent">
+          <div class="metric">11</div>
+          <h2>学校経営論</h2>
+          <p>法令上の職務から、学校を経営体として捉える議論へ。</p>
+        </article>
+        <article class="card success">
+          <div class="metric">12</div>
+          <h2>学校運営の新潮流</h2>
+          <p>学校運営協議会、学校評価、NPM等の制度改革へ。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h1>ミニッツペーパー</h1>
+      <div class="visual-split">
+        <div class="prompt-panel" style="font-size:clamp(27px,3vw,52px)">重要だと思ったこと<br>興味を持ったこと<br>疑問に思ったこと<br><span style="display:block;margin-top:22px;font-size:.62em">いずれかを、自分の言葉で記述してください。</span></div>
+        <img class="slide-illustration" src="assets/minute-paper-students.png" alt="大学の講義室で授業を振り返り、対話しながらミニッツペーパーを書く学生のイラスト">
+      </div>
+      <aside class="speaker-note">近くの受講者との対話を推奨。記入後に出席コードを案内する。</aside>
+    </section>
+  </main>
+
+  <div class="notes-panel" id="notes" aria-live="polite"></div>
+  <div class="counter" id="counter"></div>
+  <div class="progress" id="progress"></div>
+  <nav class="controls" aria-label="スライド操作">
+    <button type="button" id="prev" title="前へ">‹</button>
+    <button type="button" id="next" title="次へ">›</button>
+    <button type="button" id="notesButton" title="発表者メモ（N）">N</button>
+    <button type="button" id="overviewButton" title="一覧（O）">O</button>
+    <button type="button" id="fullscreenButton" title="全画面（F）">F</button>
+  </nav>
+
+  <script>
+    (() => {
+      const deck = document.getElementById("deck");
+      const slides = [...document.querySelectorAll(".slide")];
+      const counter = document.getElementById("counter");
+      const progress = document.getElementById("progress");
+      const notes = document.getElementById("notes");
+      let index = Math.max(0, Math.min(slides.length - 1, Number(location.hash.slice(1)) - 1 || 0));
+      let overview = false;
+
+      const render = () => {
+        slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+        counter.textContent = `${index + 1} / ${slides.length}`;
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        const note = slides[index].querySelector(".speaker-note");
+        notes.innerHTML = note ? `<strong>発表者メモ</strong><br>${note.innerHTML}` : "<strong>発表者メモ</strong><br>このスライドにメモはありません。";
+        if (!overview) history.replaceState(null, "", `#${index + 1}`);
+      };
+
+      const move = delta => {
+        if (overview) return;
+        index = Math.max(0, Math.min(slides.length - 1, index + delta));
+        render();
+      };
+
+      const toggleOverview = () => {
+        overview = !overview;
+        deck.classList.toggle("overview", overview);
+        if (!overview) render();
+      };
+
+      document.getElementById("prev").addEventListener("click", () => move(-1));
+      document.getElementById("next").addEventListener("click", () => move(1));
+      document.getElementById("notesButton").addEventListener("click", () => notes.classList.toggle("visible"));
+      document.getElementById("overviewButton").addEventListener("click", toggleOverview);
+      document.getElementById("fullscreenButton").addEventListener("click", () => {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      });
+
+      slides.forEach((slide, i) => slide.addEventListener("click", () => {
+        if (!overview) return;
+        index = i;
+        toggleOverview();
+      }));
+
+      document.addEventListener("keydown", event => {
+        if (["ArrowRight", "PageDown", " ", "Enter"].includes(event.key)) {
+          event.preventDefault();
+          move(1);
+        } else if (["ArrowLeft", "PageUp", "Backspace"].includes(event.key)) {
+          event.preventDefault();
+          move(-1);
+        } else if (event.key.toLowerCase() === "n") {
+          notes.classList.toggle("visible");
+        } else if (event.key.toLowerCase() === "o") {
+          toggleOverview();
+        } else if (event.key.toLowerCase() === "f") {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+          else document.exitFullscreen();
+        } else if (event.key === "Home") {
+          index = 0;
+          render();
+        } else if (event.key === "End") {
+          index = slides.length - 1;
+          render();
+        } else if (event.key === "Escape" && overview) {
+          toggleOverview();
+        }
+      });
+
+      window.addEventListener("hashchange", () => {
+        const next = Number(location.hash.slice(1)) - 1;
+        if (Number.isInteger(next) && next >= 0 && next < slides.length) {
+          index = next;
+          render();
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
